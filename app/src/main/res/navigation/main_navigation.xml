@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/contentFragment">
+
+    <fragment
+        android:id="@+id/contentFragment"
+        android:name="com.example.myfirstapp.content.ContentFragment"
+        android:label="fragment_content"
+        tools:layout="@layout/fragment_content" >
+        <action
+            android:id="@+id/action_contentFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_memoryFragment"
+            app:destination="@id/memoryFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_mathFragment"
+            app:destination="@id/mathFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.myfirstapp.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.myfirstapp.content.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/memoryFragment"
+        android:name="com.example.myfirstapp.content.memory.MemoryFragment"
+        android:label="fragment_memory"
+        tools:layout="@layout/fragment_memory" />
+    <fragment
+        android:id="@+id/mathFragment"
+        android:name="com.example.myfirstapp.content.math.MathFragment"
+        android:label="fragment_math"
+        tools:layout="@layout/fragment_math" />
+</navigation>
