@@ -8,4 +8,14 @@
     <string name="math">Математика</string>
     <string name="memory">Меморија</string>
     <string name="welcome_message">Здраво Андреј</string>
+    <!--Strings for LoginFragment-->
+    <string name="login_button">Најави се</string>
+    <string name="login_email_hint">E-mail</string>
+    <string name="login_password">Лозинка</string>
+    <string name="register_label">Регистрирај се</string>
+    <!--Strings for RegisterFragment-->
+    <string name="register_button">Регистрирај се</string>
+    <string name="register_repeat_password">Повтори ја лозинката</string>
+    <string name="register_login_label">Најави се</string>
+    <string name="button_logout_label">Одјави се</string>
 </resources>
