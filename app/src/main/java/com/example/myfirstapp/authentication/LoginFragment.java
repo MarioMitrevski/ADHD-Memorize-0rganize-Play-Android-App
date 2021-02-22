@@ -1,6 +1,8 @@
 package com.example.myfirstapp.authentication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,27 +12,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.example.myfirstapp.MainActivity;
+import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentLoginBinding;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment {
-    interface LoginListener {
-        void onAuthenticationSuccess(String email, String password);
 
-        void toRegisterFragment();
-    }
+    private FragmentLoginBinding loginBinding;
+    private SharedPreferences sharedPreferences;
 
-    FragmentLoginBinding loginBinding;
-    LoginListener loginListener;
-    String email;
-    String password;
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -41,84 +37,58 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setLoginButtonListener();
-        setBackToLoginListener();
+
+        this.sharedPreferences =
+                getActivity().getSharedPreferences("com.example.myfirstapp.userstore", Context.MODE_PRIVATE);
+
+        initClickListeners();
     }
 
-    private void setBackToLoginListener() {
-      loginBinding.textViewRegisterLabel.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              loginListener.toRegisterFragment();
-          }
-      });
-    }
+    private void initClickListeners() {
 
-    private void setLoginButtonListener() {
-        loginBinding.buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validateFields();
-            }
-        });
+        loginBinding.registerButton.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment));
+        loginBinding.buttonLogin.setOnClickListener(view -> validateFields());
     }
 
     public void validateFields() {
-        email = loginBinding.editTextLoginEmail.getText().toString();
-        password = loginBinding.editTextLoginPassword.getText().toString();
+        String email = loginBinding.editTextLoginEmail.getText().toString();
+        String password = loginBinding.editTextLoginPassword.getText().toString();
+
         if (checkUserCredentials(email, password)) {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser == null) {
-                signInUserWithEmailAndPassword();
+                signInUserWithEmailAndPassword(email, password);
             } else {
-                currentUser.reload();
                 if (currentUser.isEmailVerified()) {
-                    signInUserWithEmailAndPassword();
+                    signInUserWithEmailAndPassword(email, password);
                 } else {
-                    Toast.makeText(getActivity(), "Check email to verify!",
+                    Toast.makeText(getActivity(), "Проверете ја меил адресата за да ја завршите регистрацијата!",
                             Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
-            loginBinding.editTextLoginEmail.setError("Please fill all fields correctly!");
-            Toast.makeText(getActivity(), "Invalidate Input!", Toast.LENGTH_SHORT).show();
+            loginBinding.editTextLoginEmail.setError("Пополнете ги полињата соодветно!");
+            Toast.makeText(getActivity(), "Пополнете ги полињата соодветно!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void signInUserWithEmailAndPassword() {
+    public void signInUserWithEmailAndPassword(String email, String password) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        loginListener.onAuthenticationSuccess(email, password);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Authentication fail!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                .addOnSuccessListener(authResult -> navigateToMainScreen(email, password))
+                .addOnFailureListener(e -> Toast.makeText(getActivity(), "Автентикацијата е неуспешна!", Toast.LENGTH_SHORT).show());
+    }
+
+    private void navigateToMainScreen(String email, String password) {
+        sharedPreferences.edit().putString("email", email).apply();
+        sharedPreferences.edit().putString("password", password).apply();
+        Intent homeIntent = new Intent(requireContext(), MainActivity.class);
+        startActivity(homeIntent);
+        requireActivity().finish();
     }
 
     public boolean checkUserCredentials(String email, String password) {
-        return !email.equals("") && !password.equals("")
+        return !email.isEmpty() && !password.isEmpty()
                 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof LoginListener)
-            loginListener = (LoginListener) context;
-        else
-            throw new ClassCastException(context.toString() + " must implement Login Listener");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        loginListener = null;
     }
 
     @Override
