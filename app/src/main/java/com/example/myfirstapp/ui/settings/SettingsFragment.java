@@ -1,4 +1,4 @@
-package com.example.myfirstapp.content.memory;
+package com.example.myfirstapp.ui.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,17 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.myfirstapp.databinding.FragmentMemoryBinding;
+import com.example.myfirstapp.databinding.FragmentSettingsBinding;
 
-public class MemoryFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
-    private FragmentMemoryBinding binding;
+    private FragmentSettingsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentMemoryBinding.inflate(inflater, container, false);
+        binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
