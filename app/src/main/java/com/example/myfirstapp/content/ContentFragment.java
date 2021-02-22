@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myfirstapp.databinding.FragmentContentBinding;
@@ -19,8 +21,16 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentContentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
 
     @Override
     public void onDestroyView() {

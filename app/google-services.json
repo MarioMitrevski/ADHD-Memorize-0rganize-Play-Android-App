@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300861035443",
+    "project_id": "adhd-memorize-organize-play",
+    "storage_bucket": "adhd-memorize-organize-play.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300861035443:android:fff4853f56df7365a031c6",
+        "android_client_info": {
+          "package_name": "com.example.myfirstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300861035443-8hqfefucamitt8275khq3fto9tjbg0ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHsTM5_NdETwWGSF12-dvEo7MHbOmoPRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300861035443-8hqfefucamitt8275khq3fto9tjbg0ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
