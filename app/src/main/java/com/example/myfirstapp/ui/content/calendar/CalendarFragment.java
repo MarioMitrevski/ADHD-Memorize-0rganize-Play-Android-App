@@ -1,7 +1,6 @@
 package com.example.myfirstapp.ui.content.calendar;
 
-import android.annotation.SuppressLint;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +8,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentCalendarBinding;
-import com.example.myfirstapp.network.ToDoItem;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import org.threeten.bp.DayOfWeek;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.temporal.TemporalAmount;
 
 import java.util.ArrayList;
 
@@ -42,6 +35,7 @@ public class CalendarFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,24 +67,16 @@ public class CalendarFragment extends Fragment {
                 text = "Активности за " + date.getDate();
             }
             binding.activitiesForDayView.setText(text);
+            adapter.updateDataSet(calendarViewModel.getToDoItems());
+
         });
-        ArrayList<ToDoItem> toDoItems = new ArrayList<>();
-        toDoItems.add(new ToDoItem("Напиши домашно", "12:00", R.drawable.ic_homework));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "13:00", R.drawable.ic_friends));
-        toDoItems.add(new ToDoItem("Јади овошје", "14:00", R.drawable.ic_lunch_box));
-
-        toDoItems.add(new ToDoItem("Напиши домашно", "12:00", R.drawable.ic_homework));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "13:00", R.drawable.ic_friends));
-        toDoItems.add(new ToDoItem("Јади овошје", "14:00", R.drawable.ic_lunch_box));
-
-        toDoItems.add(new ToDoItem("Напиши домашно", "12:00", R.drawable.ic_homework));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "13:00", R.drawable.ic_friends));
-        toDoItems.add(new ToDoItem("Јади овошје", "14:00", R.drawable.ic_lunch_box));
-
-
         binding.todoRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new TodoAdapter(toDoItems);
+        adapter = new TodoAdapter(new ArrayList<>());
         binding.todoRecyclerView.setAdapter(adapter);
+
+        binding.addActivityBtn.setOnClickListener(v -> {
+
+        });
     }
 
     @Override

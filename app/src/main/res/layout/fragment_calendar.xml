@@ -72,21 +72,37 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:paddingVertical="16dp"
+                android:paddingVertical="@dimen/padding_vertical_activities_for_date"
                 android:text="Активности за денес"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/activities_for_date_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todo_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:id="@+id/todo_recycler_view"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@id/add_activity_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activities_for_day_view" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_activity_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_add_activity_btn"
+                android:paddingHorizontal="8dp"
+                android:text="Додади нова активност"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
