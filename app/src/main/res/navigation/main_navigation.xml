@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_content" >
         <action
             android:id="@+id/action_contentFragment_to_calendarFragment"
-            app:destination="@id/calendarFragment" />
+            app:destination="@id/calendarFragment"
+            app:launchSingleTop="false" />
         <action
             android:id="@+id/action_contentFragment_to_memoryFragment"
             app:destination="@id/memoryFragment" />
