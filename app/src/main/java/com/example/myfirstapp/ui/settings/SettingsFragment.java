@@ -1,4 +1,4 @@
-package com.example.myfirstapp.settings;
+package com.example.myfirstapp.ui.settings;
 
 import android.content.Context;
 import android.content.Intent;
