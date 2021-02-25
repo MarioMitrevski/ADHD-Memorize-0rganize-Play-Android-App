@@ -49,6 +49,7 @@ public class RegisterFragment extends Fragment {
                 .child(currentUser.getUid());
         User newUser = new User();
         newUser.setNameSurname("");
+        newUser.setPoints("");
         newUser.setUserId(currentUser.getUid());
         newUserRef.setValue(newUser);
 
