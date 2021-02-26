@@ -1,4 +1,4 @@
-package com.example.myfirstapp.content.math;
+package com.example.myfirstapp.ui.content.math;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
@@ -65,6 +65,7 @@ public class MathFragment extends Fragment {
         initAdapter();
         setBackButtonListener();
         readCurrentUserPointState();
+        binding.toolbarText.setText("Час по математика");
     }
 
     private void readCurrentUserPointState() {
