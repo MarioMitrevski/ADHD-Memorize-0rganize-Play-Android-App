@@ -14,6 +14,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/question_button_background"
         android:textColor="@color/white"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

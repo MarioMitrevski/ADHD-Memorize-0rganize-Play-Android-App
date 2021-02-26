@@ -65,7 +65,7 @@ public class MathFragment extends Fragment {
         initAdapter();
         setBackButtonListener();
         readCurrentUserPointState();
-        binding.toolbarText.setText("Час по математика");
+        mathBinding.toolbarText.setText("Час по математика");
     }
 
     private void readCurrentUserPointState() {
@@ -146,7 +146,7 @@ public class MathFragment extends Fragment {
 
     public void changeQuestion() {
         questionCounter++;
-        mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
+        mathBinding.textViewQuestionCounter.setText(String.format("%s %s", getString(R.string
                 .question_counter_prefix), questionCounter));
         if (questionCounter <= NUMBER_OF_QUESTIONS) {
             suggestedAnswersList.clear();

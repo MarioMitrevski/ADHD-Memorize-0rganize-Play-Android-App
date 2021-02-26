@@ -1,4 +1,4 @@
-package com.example.myfirstapp.content.math;
+package com.example.myfirstapp.ui.content.math;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
