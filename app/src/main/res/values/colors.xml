@@ -9,4 +9,5 @@
     <color name="light_black">#0D0D10</color>
     <color name="colorTransparent">#00000000 </color>
     <color name="splash">#F3EDDA</color>
+    <color name="colorBlue">#00ccff</color>
 </resources>

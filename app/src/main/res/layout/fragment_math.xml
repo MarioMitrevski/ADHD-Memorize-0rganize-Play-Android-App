@@ -37,67 +37,49 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/text_view_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Петко Петковски"
-        app:layout_constraintBottom_toBottomOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintEnd_toStartOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintTop_toTopOf="@id/lottieanimationview_game_counter" />
-
-    <TextView
         android:id="@+id/text_view_question_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintStart_toEndOf="@id/text_view_user_points"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lottieanimationview_game_counter"
         app:layout_constraintTop_toTopOf="@id/lottieanimationview_game_counter" />
 
     <TextView
         android:id="@+id/text_view_question"
         android:layout_width="0dp"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:textSize="22sp"
+        android:gravity="center"
         android:maxLines="5"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp"
+        android:textStyle="normal"
+        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lottieanimationview_game_counter" />
-
-    <ImageView
-        android:id="@+id/image_view_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_user_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintStart_toStartOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/lottieanimationview_game_counter"
+        app:layout_constraintEnd_toStartOf="@+id/lottieanimationview_game_counter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lottieanimationview_game_counter" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieanimationview_game_counter"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_user_points"
-        app:lottie_autoPlay="true"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:lottie_autoPlay="false"
         app:lottie_url="https://assets8.lottiefiles.com/packages/lf20_689pdhcy.json" />
 
     <androidx.recyclerview.widget.RecyclerView
