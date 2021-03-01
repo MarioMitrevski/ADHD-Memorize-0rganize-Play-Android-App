@@ -30,7 +30,11 @@
         android:id="@+id/calendarFragment"
         android:name="com.example.myfirstapp.ui.content.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_addActivityFragment"
+            app:destination="@id/addActivityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/memoryFragment"
         android:name="com.example.myfirstapp.ui.content.memory.MemoryFragment"
@@ -41,4 +45,9 @@
         android:name="com.example.myfirstapp.ui.content.math.MathFragment"
         android:label="fragment_math"
         tools:layout="@layout/fragment_math" />
+    <fragment
+        android:id="@+id/addActivityFragment"
+        android:name="com.example.myfirstapp.ui.content.calendar.AddToDoItemFragment"
+        android:label="fragment_add_activity"
+        tools:layout="@layout/fragment_add_todoitem" />
 </navigation>
