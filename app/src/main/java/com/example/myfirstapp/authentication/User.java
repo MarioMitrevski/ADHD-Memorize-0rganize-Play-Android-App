@@ -3,8 +3,17 @@ package com.example.myfirstapp.authentication;
 public class User {
     private String nameSurname;
     private String userId;
+    private String points;
 
     public User() {
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
     }
 
     public String getNameSurname() {
