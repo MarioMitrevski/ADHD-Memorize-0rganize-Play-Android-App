@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="todo_item_title_txt_size">20sp</dimen>
-    <dimen name="todo_item_time_txt_size">18sp</dimen>
-    <dimen name="activities_for_date_title">20sp</dimen>
-    <dimen name="todo_item_image_height">60dp</dimen>
-    <dimen name="padding_vertical_activities_for_date">16dp</dimen>
-</resources>

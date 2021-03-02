@@ -1,97 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.content.math.MathFragment">
+    tools:context=".content.math.MathFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="2dp"
-        android:background="@color/white"
-        android:elevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_scrollFlags="enterAlways">
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
 
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:contentDescription="TODO" />
-
-        <TextView
-            android:id="@+id/toolbar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:textColor="@color/light_black"
-            android:textSize="22sp" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/text_view_question_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/lottieanimationview_game_counter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lottieanimationview_game_counter"
-        app:layout_constraintTop_toTopOf="@id/lottieanimationview_game_counter" />
-
-    <TextView
-        android:id="@+id/text_view_question"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="center"
-        android:maxLines="5"
-        android:textColor="@color/colorPrimary"
-        android:textSize="22sp"
-        android:textStyle="normal"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lottieanimationview_game_counter" />
-
-    <TextView
-        android:id="@+id/text_view_user_points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/lottieanimationview_game_counter"
-        app:layout_constraintEnd_toStartOf="@+id/lottieanimationview_game_counter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lottieanimationview_game_counter" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieanimationview_game_counter"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:lottie_autoPlay="false"
-        app:lottie_url="https://assets8.lottiefiles.com/packages/lf20_689pdhcy.json" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_math"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/recyclerview_background"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_question" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
