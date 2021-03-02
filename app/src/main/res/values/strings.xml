@@ -29,4 +29,5 @@
     <string name="question_counter_prefix">Број на прашање:\u0020</string>
     <string name="result_dialog_title">Резултати од квизот по математика!</string>
     <string name="starting_dialog_level_maths_game">Одбери ниво</string>
+    <string name="maths_game_toolbar_text">Час по математика</string>
 </resources>

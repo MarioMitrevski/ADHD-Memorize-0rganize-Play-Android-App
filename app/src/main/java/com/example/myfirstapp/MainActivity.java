@@ -12,8 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.myfirstapp.ui.content.math.MathFragment;
 import com.example.myfirstapp.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements MathFragment
-        .OnQuizItemClickedListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +28,4 @@ public class MainActivity extends AppCompatActivity implements MathFragment
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    @Override
-    public void updateStarted() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    @Override
-    public void updateEnded() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
 }

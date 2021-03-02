@@ -2,20 +2,18 @@ package com.example.myfirstapp.ui.content.math;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -36,11 +34,6 @@ import static com.example.myfirstapp.ConstantValuesUtil.STARTING_GAME_POINTS;
 import static com.example.myfirstapp.ConstantValuesUtil.STARTING_QUESTION_NUMBER;
 
 public class MathFragment extends Fragment {
-    public interface OnQuizItemClickedListener {
-        void updateStarted();
-
-        void updateEnded();
-    }
 
     private FragmentMathBinding mathBinding;
     ArrayList<String> suggestedAnswersList;
@@ -49,7 +42,6 @@ public class MathFragment extends Fragment {
     int questionCounter = STARTING_QUESTION_NUMBER;
     int points = STARTING_GAME_POINTS;
     NavController navController;
-    OnQuizItemClickedListener itemClickedListener;
     int userCurrentPointState;
     DatabaseReference pointsRef;
     DatabaseReference gameMathRef;
@@ -70,7 +62,7 @@ public class MathFragment extends Fragment {
         setBackButtonListener();
         readCurrentUserPointState();
         startAnimationCountDown();
-        mathBinding.toolbarText.setText("Час по математика");
+        mathBinding.toolbarText.setText(R.string.maths_game_toolbar_text);
     }
 
     private void showStartingDialog() {
@@ -128,7 +120,7 @@ public class MathFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_mathFragment_to_contentFragment);
-                itemClickedListener.updateEnded();
+                updateEnded();
             }
         });
     }
@@ -138,7 +130,7 @@ public class MathFragment extends Fragment {
         mathBinding.lottieanimationviewGameCounter.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                itemClickedListener.updateEnded();
+                updateEnded();
                 readQuestion();
             }
 
@@ -186,7 +178,7 @@ public class MathFragment extends Fragment {
 
     public void changeQuestion() {
         questionCounter++;
-        if(!isVisible())
+        if (!isVisible())
             return;
         mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
                 .question_counter_prefix), questionCounter));
@@ -198,7 +190,7 @@ public class MathFragment extends Fragment {
             pointsRef.setValue(String.valueOf(userCurrentPointState + points));
             showResultDialog();
             navController.navigate(R.id.action_mathFragment_to_contentFragment);
-            itemClickedListener.updateEnded();
+            updateEnded();
         }
     }
 
@@ -228,6 +220,15 @@ public class MathFragment extends Fragment {
         }
     }
 
+    private void updateStarted() {
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void updateEnded() {
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
     private void initAdapter() {
         suggestedAnswersList = new ArrayList<>();
         mathBinding.textViewUserPoints.setText(String.format("%s%s", getString(R.string
@@ -237,7 +238,7 @@ public class MathFragment extends Fragment {
                     @Override
                     public void onAnswerClick(String answer, View itemView) {
                         setAnswersFeedback(answer, itemView);
-                        itemClickedListener.updateStarted();
+                        updateStarted();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -252,24 +253,6 @@ public class MathFragment extends Fragment {
                 .question_counter_prefix), questionCounter));
         pointsRef = FirebaseDatabase.getInstance().getReference("users")
                 .child("points");
-    }
-
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof MathFragment.OnQuizItemClickedListener) {
-            itemClickedListener = (OnQuizItemClickedListener) context;
-        } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement ProfileListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        itemClickedListener = null;
     }
 
     @Override
