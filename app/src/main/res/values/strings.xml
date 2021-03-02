@@ -7,5 +7,30 @@
     <string name="calendar">Календар на активности</string>
     <string name="math">Математика</string>
     <string name="memory">Меморија</string>
-    <string name="welcome_message">Здраво Андреј</string>
+    <string name="welcome_message">Здраво \</string>
+
+    <!--Strings for LoginFragment-->
+    <string name="login_button">Најави се</string>
+    <string name="login_email_hint">E-mail</string>
+    <string name="login_password">Лозинка</string>
+    <string name="register_label">Сеуште не сте корисник? Регистрирајте се</string>
+
+    <!--Strings for RegisterFragment-->
+    <string name="register_button">Регистрирај се</string>
+    <string name="register_repeat_password">Повтори ја лозинката</string>
+    <string name="register_login_label">Најави се</string>
+    <string name="button_logout_label">Одјави се</string>
+    <string name="login_title">Форма за најава</string>
+    <string name="welcome_title">Добредојдовте на ADHD\nНаучи, Меморирај и Планирај</string>
+    <string name="login_label">Корисник сте? Најавете се</string>
+    <string name="register_title">Форма за регистрација</string>
+    <!--Strings for GameMathFragment-->
+    <string name="points_prefix">Поени:\u0020</string>
+    <string name="question_counter_prefix">Број на прашање:\u0020</string>
+    <string name="result_dialog_title">Резултати од квизот по математика!</string>
+    <string name="starting_dialog_level_maths_game">Одбери ниво</string>
+    <string name="maths_game_toolbar_text">Час по математика</string>
+    <string name="verification_mail_sent_text">\"Верификациски меил е испратен на \"</string>
+    <string name="passwords_not_match_text">Лозинките не се исти!</string>
+    <string name="nickname_hint">Твојот надимак</string>
 </resources>
