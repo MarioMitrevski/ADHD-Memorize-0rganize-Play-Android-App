@@ -1,7 +1,7 @@
 package com.example.myfirstapp.authentication;
 
 public class User {
-    private String nameSurname;
+    private String nickname;
     private String userId;
     private String points;
 
@@ -16,12 +16,12 @@ public class User {
         this.points = points;
     }
 
-    public String getNameSurname() {
-        return nameSurname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNameSurname(String nameSurname) {
-        this.nameSurname = nameSurname;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUserId() {
