@@ -7,13 +7,12 @@
 
     <fragment
         android:id="@+id/contentFragment"
-        android:name="com.example.myfirstapp.ui.content.ContentFragment"
+        android:name="com.example.myfirstapp.content.ContentFragment"
         android:label="fragment_content"
         tools:layout="@layout/fragment_content" >
         <action
             android:id="@+id/action_contentFragment_to_calendarFragment"
-            app:destination="@id/calendarFragment"
-            app:launchSingleTop="false" />
+            app:destination="@id/calendarFragment" />
         <action
             android:id="@+id/action_contentFragment_to_memoryFragment"
             app:destination="@id/memoryFragment" />
@@ -23,26 +22,22 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.myfirstapp.ui.settings.SettingsFragment"
+        android:name="com.example.myfirstapp.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.myfirstapp.ui.content.calendar.CalendarFragment"
+        android:name="com.example.myfirstapp.content.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/memoryFragment"
-        android:name="com.example.myfirstapp.ui.content.memory.MemoryFragment"
+        android:name="com.example.myfirstapp.content.memory.MemoryFragment"
         android:label="fragment_memory"
         tools:layout="@layout/fragment_memory" />
     <fragment
         android:id="@+id/mathFragment"
-        android:name="com.example.myfirstapp.ui.content.math.MathFragment"
+        android:name="com.example.myfirstapp.content.math.MathFragment"
         android:label="fragment_math"
-        tools:layout="@layout/fragment_math" >
-        <action
-            android:id="@+id/action_mathFragment_to_contentFragment"
-            app:destination="@id/contentFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_math" />
 </navigation>
