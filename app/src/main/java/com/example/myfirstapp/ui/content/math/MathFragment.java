@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +19,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentMathBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +46,7 @@ public class MathFragment extends Fragment {
     int userCurrentPointState;
     DatabaseReference pointsRef;
     DatabaseReference gameMathRef;
+    FirebaseUser currentUser;
     int numberOfQuestions;
 
     @Override
@@ -57,6 +59,7 @@ public class MathFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         initAdapter();
         showStartingDialog();
         setBackButtonListener();
@@ -120,7 +123,6 @@ public class MathFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_mathFragment_to_contentFragment);
-                updateEnded();
             }
         });
     }
@@ -130,7 +132,6 @@ public class MathFragment extends Fragment {
         mathBinding.lottieanimationviewGameCounter.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                updateEnded();
                 readQuestion();
             }
 
@@ -178,6 +179,7 @@ public class MathFragment extends Fragment {
 
     public void changeQuestion() {
         questionCounter++;
+        MathFragmentAdapter.isClickable = true;
         if (!isVisible())
             return;
         mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
@@ -190,7 +192,6 @@ public class MathFragment extends Fragment {
             pointsRef.setValue(String.valueOf(userCurrentPointState + points));
             showResultDialog();
             navController.navigate(R.id.action_mathFragment_to_contentFragment);
-            updateEnded();
         }
     }
 
@@ -220,15 +221,6 @@ public class MathFragment extends Fragment {
         }
     }
 
-    private void updateStarted() {
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    private void updateEnded() {
-        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
     private void initAdapter() {
         suggestedAnswersList = new ArrayList<>();
         mathBinding.textViewUserPoints.setText(String.format("%s%s", getString(R.string
@@ -237,8 +229,8 @@ public class MathFragment extends Fragment {
                 new MathFragmentAdapter.OnSuggestedAnswerClickListener() {
                     @Override
                     public void onAnswerClick(String answer, View itemView) {
+                        MathFragmentAdapter.isClickable = false;
                         setAnswersFeedback(answer, itemView);
-                        updateStarted();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -251,7 +243,7 @@ public class MathFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
                 .question_counter_prefix), questionCounter));
-        pointsRef = FirebaseDatabase.getInstance().getReference("users")
+        pointsRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid())
                 .child("points");
     }
 
