@@ -21,6 +21,7 @@ public class MathFragmentAdapter extends RecyclerView.Adapter<MathFragmentAdapte
     ArrayList<String> suggestedAnswersList;
     OnSuggestedAnswerClickListener listener;
     String correctAnswer;
+    public static boolean isClickable = true;
 
     public MathFragmentAdapter(ArrayList<String> suggestedAnswersList, String correctAnswer,
                                OnSuggestedAnswerClickListener listener) {
@@ -62,7 +63,9 @@ public class MathFragmentAdapter extends RecyclerView.Adapter<MathFragmentAdapte
             suggestedAnswerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onAnswerClick(suggestedAnswer, v);
+                    if (isClickable) {
+                        listener.onAnswerClick(suggestedAnswer, v);
+                    }
                 }
             });
         }
