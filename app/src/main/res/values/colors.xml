@@ -10,4 +10,6 @@
     <color name="colorTransparent">#00000000 </color>
     <color name="splash">#F3EDDA</color>
     <color name="colorBlue">#00ccff</color>
+    <color name="colorMagenta">#df4269</color>
+    <color name="colorLightBrown">#F4DBC4</color>
 </resources>
