@@ -3,8 +3,6 @@ package com.example.myfirstapp.ui.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -12,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,13 +29,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 
-import static android.content.Context.AUDIO_SERVICE;
-
 public class SettingsFragment extends Fragment {
-    private FragmentSettingsBinding binding;
+
+    public interface SettingsSoundStateListener {
+        void onSoundChange();
+    }
+
+    public static FragmentSettingsBinding binding;
     private FirebaseUser currentUser;
     private DatabaseReference nicknameDatabaseRef;
     private SharedPreferences sharedPreferences;
+    private SettingsSoundStateListener settingsSoundStateListener;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,7 +63,6 @@ public class SettingsFragment extends Fragment {
 
     private void setCheckedSwitch() {
         binding.switchEnableSound.setChecked(sharedPreferences.getBoolean("soundOn", true));
-
     }
 
     private void setNicknameChangeListener() {
@@ -141,7 +141,7 @@ public class SettingsFragment extends Fragment {
             } else {
                 sharedPreferences.edit().putBoolean("soundOn", false).apply();
             }
-
+            settingsSoundStateListener.onSoundChange();
         });
     }
 
@@ -151,11 +151,20 @@ public class SettingsFragment extends Fragment {
         binding = null;
     }
 
-    private void muteOrUnmute(int adjust) {
-        //mute audio
-        if (getActivity() == null)
-            return;
-        AudioManager audioManager = (AudioManager) getActivity().getSystemService(AUDIO_SERVICE);
-        audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, adjust, 0);
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof SettingsSoundStateListener) {
+            settingsSoundStateListener = (SettingsSoundStateListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement SettingsSoundStateListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        settingsSoundStateListener = null;
     }
 }
