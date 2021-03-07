@@ -2,6 +2,9 @@ package com.example.myfirstapp.ui.settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -9,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,10 +32,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 
+import static android.content.Context.AUDIO_SERVICE;
+
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
     private FirebaseUser currentUser;
-    DatabaseReference nicknameDatabaseRef;
+    private DatabaseReference nicknameDatabaseRef;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,6 +54,15 @@ public class SettingsFragment extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         setInitialNickname();
         initClickListeners();
+        sharedPreferences =
+                getActivity().getSharedPreferences("com.example.myfirstapp.userstore", Context.MODE_PRIVATE);
+
+        setCheckedSwitch();
+    }
+
+    private void setCheckedSwitch() {
+        binding.switchEnableSound.setChecked(sharedPreferences.getBoolean("soundOn", true));
+
     }
 
     private void setNicknameChangeListener() {
@@ -78,8 +94,10 @@ public class SettingsFragment extends Fragment {
         nicknameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                binding.editTextNickname.setText(String.valueOf(snapshot.getValue()));
-                setNicknameChangeListener();
+                if (isVisible()) {
+                    binding.editTextNickname.setText(String.valueOf(snapshot.getValue()));
+                    setNicknameChangeListener();
+                }
             }
 
             @Override
@@ -108,15 +126,36 @@ public class SettingsFragment extends Fragment {
                 if (getActivity() == null)
                     return;
                 UIUtil.hideKeyboard(getActivity());
+            } else if (binding.imageViewEditNicknameIcon.getDrawable().getConstantState() ==
+                    getResources().getDrawable(R.drawable.ic_pencil_foreground).getConstantState()) {
+                binding.editTextNickname.requestFocus();
+                binding.editTextNickname.setSelection(binding.editTextNickname.getText().length());
             }
         });
 
         binding.editTextNickname.setOnClickListener(view -> binding.editTextNickname.setCursorVisible(true));
+
+        binding.switchEnableSound.setOnClickListener(view -> {
+            if (binding.switchEnableSound.isChecked()) {
+                sharedPreferences.edit().putBoolean("soundOn", true).apply();
+            } else {
+                sharedPreferences.edit().putBoolean("soundOn", false).apply();
+            }
+
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void muteOrUnmute(int adjust) {
+        //mute audio
+        if (getActivity() == null)
+            return;
+        AudioManager audioManager = (AudioManager) getActivity().getSystemService(AUDIO_SERVICE);
+        audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, adjust, 0);
     }
 }

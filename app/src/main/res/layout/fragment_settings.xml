@@ -25,8 +25,35 @@
         app:layout_constraintEnd_toEndOf="@+id/text_view_nickname"
         app:layout_constraintStart_toStartOf="@+id/text_view_nickname"
         app:layout_constraintTop_toBottomOf="@+id/text_view_nickname"
-        tools:ignore="LabelFor"/>
+        tools:ignore="LabelFor" />
 
+
+    <ImageView
+        android:id="@+id/image_view_edit_nickname_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_pencil_foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNickname"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
+        app:layout_constraintTop_toTopOf="@+id/editTextNickname" />
+
+    <Switch
+        android:id="@+id/switch_enable_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/enable_sound_app_text"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
+        app:layout_constraintStart_toStartOf="@+id/editTextNickname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNickname"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/text_view_nickname"
@@ -35,13 +62,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
         android:text="@string/nickname_text"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_logout"
@@ -59,18 +87,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNickname"
         app:layout_constraintVertical_bias="0.946" />
-
-    <ImageView
-        android:id="@+id/image_view_edit_nickname_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_pencil_foreground"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNickname"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
-        app:layout_constraintTop_toTopOf="@+id/editTextNickname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

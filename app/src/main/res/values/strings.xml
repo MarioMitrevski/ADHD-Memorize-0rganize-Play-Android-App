@@ -33,4 +33,5 @@
     <string name="verification_mail_sent_text">\"Верификациски меил е испратен на \"</string>
     <string name="passwords_not_match_text">Лозинките не се исти!</string>
     <string name="nickname_text">Твојот надимак</string>
+    <string name="enable_sound_app_text">Вклучи звук во апликацијата</string>
 </resources>
