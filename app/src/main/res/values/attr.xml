@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="dt">
+        <attr name="backgroundColorTheme" format="color"/>
+        <attr name="textColorTheme" format="color"/>
+        <attr name="textBarColorTheme" format="color"/>
+        <attr name="editTextColorTheme" format="color"/>
+        <attr name="btnRoundedBackground" format="color"/>
+        <attr name="windowBackground" format="color"/>
+    </declare-styleable>
+</resources>

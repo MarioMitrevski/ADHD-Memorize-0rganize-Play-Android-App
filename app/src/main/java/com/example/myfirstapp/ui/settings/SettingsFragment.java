@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.authentication.AuthenticationActivity;
+import com.example.myfirstapp.authentication.SplashScreenActivity;
 import com.example.myfirstapp.databinding.FragmentSettingsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,15 +33,17 @@ import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 
 public class SettingsFragment extends Fragment {
 
-    public interface SettingsSoundStateListener {
+    public interface SettingsStateListener {
         void onSoundChange();
+
+        void onThemeChange();
     }
 
     public static FragmentSettingsBinding binding;
     private FirebaseUser currentUser;
     private DatabaseReference nicknameDatabaseRef;
     private SharedPreferences sharedPreferences;
-    private SettingsSoundStateListener settingsSoundStateListener;
+    private SettingsStateListener settingsStateListener;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -57,11 +61,15 @@ public class SettingsFragment extends Fragment {
         initClickListeners();
         sharedPreferences =
                 getActivity().getSharedPreferences("com.example.myfirstapp.userstore", Context.MODE_PRIVATE);
-
-        setCheckedSwitch();
+        setCheckedSoundSwitch();
+        setCheckedDarkThemeSwitch();
     }
 
-    private void setCheckedSwitch() {
+    private void setCheckedDarkThemeSwitch() {
+        binding.switchEnableDarkTheme.setChecked(sharedPreferences.getBoolean("darkTheme", false));
+    }
+
+    private void setCheckedSoundSwitch() {
         binding.switchEnableSound.setChecked(sharedPreferences.getBoolean("soundOn", true));
     }
 
@@ -141,9 +149,24 @@ public class SettingsFragment extends Fragment {
             } else {
                 sharedPreferences.edit().putBoolean("soundOn", false).apply();
             }
-            settingsSoundStateListener.onSoundChange();
+            settingsStateListener.onSoundChange();
+        });
+
+        binding.switchEnableDarkTheme.setOnClickListener(view -> {
+            if (isVisible()) {
+                if (binding.switchEnableDarkTheme.isChecked()) {
+                    sharedPreferences.edit().putBoolean("darkTheme", true).apply();
+                } else {
+                    sharedPreferences.edit().putBoolean("darkTheme", false).apply();
+                }
+                settingsStateListener.onThemeChange();
+                Intent intent = new Intent(getActivity().getApplicationContext(), SplashScreenActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
         });
     }
+
 
     @Override
     public void onDestroyView() {
@@ -155,8 +178,8 @@ public class SettingsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        if (context instanceof SettingsSoundStateListener) {
-            settingsSoundStateListener = (SettingsSoundStateListener) context;
+        if (context instanceof SettingsStateListener) {
+            settingsStateListener = (SettingsStateListener) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement SettingsSoundStateListener");
         }
@@ -165,6 +188,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        settingsSoundStateListener = null;
+        settingsStateListener = null;
     }
 }

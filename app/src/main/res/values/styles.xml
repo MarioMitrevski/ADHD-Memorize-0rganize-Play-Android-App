@@ -3,16 +3,32 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColorTheme">@color/white</item>
+        <item name="textColorTheme">@color/colorPrimaryDark</item>
+        <item name="textBarColorTheme">@color/colorPrimaryDark</item>
+        <item name="editTextColorTheme">@color/colorLightBrown</item>
+        <item name="btnRoundedBackground">@color/colorPrimaryDark</item>
+        <item name="windowBackground">@color/colorPrimary</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
-    <style name="SettingsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppDarkTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/colorBlue</item>
+        <item name="backgroundColorTheme">@color/white</item>
+        <item name="textColorTheme">@color/white</item>
+        <item name="textBarColorTheme">@color/darkGray</item>
+        <item name="editTextColorTheme">@color/colorBlue</item>
+        <item name="btnRoundedBackground">@color/colorBlue</item>
+        <item name="windowBackground">@color/gray</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">

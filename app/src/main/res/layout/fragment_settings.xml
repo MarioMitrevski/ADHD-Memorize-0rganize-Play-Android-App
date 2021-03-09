@@ -19,10 +19,9 @@
         android:inputType="textPersonName"
         android:padding="10dp"
         android:text="@string/nickname_text"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/textColorTheme"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:theme="@style/SettingsTheme"
         app:layout_constraintEnd_toEndOf="@+id/text_view_nickname"
         app:layout_constraintStart_toStartOf="@+id/text_view_nickname"
         app:layout_constraintTop_toBottomOf="@+id/text_view_nickname"
@@ -50,10 +49,26 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="@string/enable_sound_app_text"
+        android:textColor="?attr/textColorTheme"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
         app:layout_constraintStart_toStartOf="@+id/editTextNickname"
         app:layout_constraintTop_toBottomOf="@+id/editTextNickname"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/switch_enable_dark_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="?attr/textColorTheme"
+        android:text="@string/enable_dark_theme_text"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/switch_enable_sound"
+        app:layout_constraintStart_toStartOf="@+id/switch_enable_sound"
+        app:layout_constraintTop_toBottomOf="@+id/switch_enable_sound"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
@@ -64,7 +79,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="@string/nickname_text"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/textColorTheme"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
