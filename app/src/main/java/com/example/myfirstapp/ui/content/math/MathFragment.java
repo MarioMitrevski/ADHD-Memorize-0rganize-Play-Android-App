@@ -10,7 +10,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,8 +95,7 @@ public class MathFragment extends Fragment {
     }
 
     private void showStartingDialog() {
-        final CharSequence[] items = {Html.fromHtml(getResources().getString(R.string.average_level_label)),
-                Html.fromHtml(getResources().getString(R.string.hard_level_label))};
+        final CharSequence[] items = {"Средно", "Тешко"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setTitle(R.string.starting_dialog_level_maths_game);
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -153,7 +151,6 @@ public class MathFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_mathFragment_to_contentFragment);
-                updateEnded();
             }
         });
     }
@@ -163,7 +160,6 @@ public class MathFragment extends Fragment {
         mathBinding.lottieanimationviewGameCounter.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                updateEnded();
                 readQuestion();
             }
 
@@ -211,6 +207,7 @@ public class MathFragment extends Fragment {
 
     public void changeQuestion() {
         questionCounter++;
+        MathFragmentAdapter.isClickable = true;
         if (!isVisible())
             return;
         mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
@@ -223,7 +220,6 @@ public class MathFragment extends Fragment {
             pointsRef.setValue(String.valueOf(userCurrentPointState + points));
             showResultDialog();
             navController.navigate(R.id.action_mathFragment_to_contentFragment);
-            updateEnded();
         }
     }
 
@@ -243,23 +239,14 @@ public class MathFragment extends Fragment {
             mediaPlayer.start();
             mathBinding.textViewUserPoints.setText(String.format("%s%s",
                     getString(R.string.points_prefix), ++points));
-            itemView.setBackgroundColor(getResources().getColor(R.color.colorCorrectAnswer));
+            itemView.setBackgroundColor(Color.GREEN);
         } else {
             mediaPlayer = MediaPlayer.create(getActivity(), R.raw.bad_answer_sound);
             mediaPlayer.start();
-            itemView.setBackgroundColor(getResources().getColor(R.color.colorWrongAnswer));
+            itemView.setBackgroundColor(Color.RED);
             mathBinding.textViewUserPoints.setText(String.format("%s%s",
                     getString(R.string.points_prefix), --points));
         }
-    }
-
-    private void updateStarted() {
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    private void updateEnded() {
-        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private void initAdapter() {
@@ -270,8 +257,8 @@ public class MathFragment extends Fragment {
                 new MathFragmentAdapter.OnSuggestedAnswerClickListener() {
                     @Override
                     public void onAnswerClick(String answer, View itemView) {
+                        MathFragmentAdapter.isClickable = false;
                         setAnswersFeedback(answer, itemView);
-                        updateStarted();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -284,7 +271,7 @@ public class MathFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         mathBinding.textViewQuestionCounter.setText(String.format("%s%s", getString(R.string
                 .question_counter_prefix), questionCounter));
-        pointsRef = FirebaseDatabase.getInstance().getReference("users")
+        pointsRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid())
                 .child("points");
     }
 
