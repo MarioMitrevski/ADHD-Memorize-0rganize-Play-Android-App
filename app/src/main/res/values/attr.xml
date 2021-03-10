@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="dt">
+        <attr name="backgroundColorTheme" format="color"/>
+        <attr name="textColorTheme" format="color"/>
+        <attr name="textBarColorTheme" format="color"/>
+        <attr name="editTextColorTheme" format="color"/>
+        <attr name="btnRoundedBackground" format="color"/>
+        <attr name="windowBackground" format="color"/>
+        <attr name="colorToolbar" format="color"/>
+        <attr name="colorToolbarText" format="color"/>
+        <attr name="colorCardsText" format="color"/>
+        <attr name="themeColorControlActivated" format="color"/>
+        <attr name="themeColorSwitchThumbNormal" format="color"/>
+        <attr name="themePencilIcon" format="reference"/>
+    </declare-styleable>
+</resources>

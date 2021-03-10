@@ -36,10 +36,10 @@ public class ContentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUsersNickname();
         binding.plannerCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_calendarFragment));
         binding.memoryCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_memoryFragment));
         binding.mathCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_mathFragment));
+        setUsersNickname();
     }
 
     private void setUsersNickname() {
@@ -49,8 +49,10 @@ public class ContentFragment extends Fragment {
         usersNicknameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                binding.textView.setText(String.format("%s%s", getString(R.string.welcome_message),
-                        snapshot.getValue()));
+                if (isVisible()) {
+                    binding.textView.setText(String.format("%s%s", getString(R.string.welcome_message),
+                            snapshot.getValue()));
+                }
             }
 
             @Override
