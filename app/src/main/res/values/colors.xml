@@ -10,4 +10,27 @@
     <color name="colorTransparent">#00000000 </color>
     <color name="splash">#F3EDDA</color>
     <color name="colorBlue">#00ccff</color>
+    <color name="colorMagenta">#cf006e</color>
+    <color name="colorBoard">#00574B</color>
+    <color name="colorBorderBoard">#AB6259</color>
+    <color name="colorMathAnswerText">#FFF</color>
+    <color name="darkGray">#2B2929</color>
+    <color name="gray">#575555</color>
+    <color name="colorLightGray">#8F8B8B</color>
+    <color name="colorLightBlue">#C2F3FF</color>
+    <color name="colorLightMagenta">#f39bb1</color>
+    <color name="colorBabyPink">#f9ced9</color>
+    <color name="textColorTheme">#00574B</color>
+    <color name="colorCardsText">#008577</color>
+    <color name="colorCardsBackground">#FFF</color>
+    <color name="windowBackground">#FFF</color>
+    <color name="editTextColorTheme">#f9ced9</color>
+    <color name="themeColorControlActivated">#df4269</color>
+    <color name="themeColorSwitchThumbNormal">#f9ced9</color>
+    <color name="btnRoundedBackground">#00574B</color>
+    <color name="colorButtonAddActivityLogout">#df4269</color>
+    <color name="colorTextTodayActivities">#FFF</color>
+    <color name="colorCorrectAnswer">#008577</color>
+    <color name="colorWrongAnswer">#AB6259</color>
+    <color name="dialogBackground">#FFF</color>
 </resources>

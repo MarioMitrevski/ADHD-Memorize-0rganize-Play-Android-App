@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f9ced9</color>
+    <color name="colorSecondary">#E8FFCE</color>
+    <color name="colorPrimaryDark">#8F8B8B</color>
+    <color name="colorAccent">#42c1a8</color>
+    <color name="white">#FFF</color>
+    <color name="colorEditTextDark">#150704</color>
+    <color name="light_black">#0D0D10</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="splash">#F3EDDA</color>
+    <color name="colorBlue">#00ccff</color>
+    <color name="colorMagenta">#cf006e</color>
+    <color name="colorBoard">#c8ede6</color>
+    <color name="colorBorderBoard">#42c1a8</color>
+    <color name="colorMathAnswerText">#0D0D10</color>
+    <color name="darkGray">#2B2929</color>
+    <color name="gray">#575555</color>
+    <color name="colorLightGray">#8F8B8B</color>
+    <color name="colorLightBlue">#C2F3FF</color>
+    <color name="colorLightMagenta">#f39bb1</color>
+    <color name="colorBabyPink">#f9ced9</color>
+    <color name="textColorTheme">#FFF</color>
+    <color name="colorCardsBackground">#000</color>
+    <color name="colorCardsText">#FFF</color>
+    <color name="windowBackground">#575555</color>
+    <color name="editTextColorTheme">#c8ede6</color>
+    <color name="themeColorControlActivated">#42c1a8</color>
+    <color name="themeColorSwitchThumbNormal">#c8ede6</color>
+    <color name="colorButtonAddActivityLogout">#c8ede6</color>
+    <color name="colorTextTodayActivities">#000</color>
+    <color name="colorCorrectAnswer">#42c1a8</color>
+    <color name="colorWrongAnswer">#f39bb1</color>
+    <color name="dialogBackground">#000</color>
+</resources>

@@ -2,14 +2,18 @@ package com.example.myfirstapp.ui.content.math;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,8 +50,10 @@ public class MathFragment extends Fragment {
     int userCurrentPointState;
     DatabaseReference pointsRef;
     DatabaseReference gameMathRef;
-    FirebaseUser currentUser;
     int numberOfQuestions;
+    FirebaseUser currentUser;
+    String nickname;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -59,13 +65,33 @@ public class MathFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mathBinding.toolbarText.setText(R.string.maths_game_toolbar_text);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        sharedPreferences =
+                getActivity().getSharedPreferences("com.example.myfirstapp.userstore", Context.MODE_PRIVATE);
+        getCurrentUserNickname();
         initAdapter();
         showStartingDialog();
         setBackButtonListener();
         readCurrentUserPointState();
         startAnimationCountDown();
-        mathBinding.toolbarText.setText(R.string.maths_game_toolbar_text);
+    }
+
+    private void getCurrentUserNickname() {
+        DatabaseReference nicknameRef =
+                pointsRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid())
+                        .child("nickname");
+        nicknameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nickname = String.valueOf(snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void showStartingDialog() {
@@ -85,6 +111,8 @@ public class MathFragment extends Fragment {
             }
         });
         AlertDialog alert = builder.create();
+        alert.getListView().setDivider(new ColorDrawable(Color.LTGRAY));
+        alert.getListView().setDividerHeight(2);
         alert.show();
         alert.setCancelable(false);
     }
@@ -198,7 +226,7 @@ public class MathFragment extends Fragment {
     private void showResultDialog() {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.result_dialog_title))
-                .setMessage("Петко Петковски ти освои:" + points)
+                .setMessage(nickname + ", бројот на поени што ги освои е: " + points)
                 .setNegativeButton(CLOSE_RESULT_LABEL, null)
                 .setIcon(R.drawable.ic_cubes_stack)
                 .show();
