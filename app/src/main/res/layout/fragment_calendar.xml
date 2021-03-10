@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_add_activity_btn"
+                android:background="@drawable/rounded_add_todoitem_btn"
                 android:paddingHorizontal="8dp"
                 android:textSize="16sp"
                 android:text="Додади нова активност"

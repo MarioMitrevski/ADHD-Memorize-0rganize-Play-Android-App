@@ -147,12 +147,7 @@ public class MathFragment extends Fragment {
     }
 
     private void setBackButtonListener() {
-        mathBinding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_mathFragment_to_contentFragment);
-            }
-        });
+        mathBinding.backBtn.setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
     private void startAnimationCountDown() {
@@ -219,7 +214,7 @@ public class MathFragment extends Fragment {
         } else {
             pointsRef.setValue(String.valueOf(userCurrentPointState + points));
             showResultDialog();
-            navController.navigate(R.id.action_mathFragment_to_contentFragment);
+            requireActivity().onBackPressed();
         }
     }
 

@@ -66,7 +66,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         } else {
-            loginBinding.editTextLoginEmail.setError("Пополнете ги полињата соодветно!");
             Toast.makeText(getActivity(), "Пополнете ги полињата соодветно!", Toast.LENGTH_SHORT).show();
         }
     }

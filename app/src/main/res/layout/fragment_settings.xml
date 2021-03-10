@@ -97,7 +97,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_add_activity_btn"
+        android:background="@drawable/rounded_add_todoitem_btn"
         android:text="@string/button_logout_label"
         android:textColor="@color/colorMathAnswerText"
         android:textSize="16sp"
