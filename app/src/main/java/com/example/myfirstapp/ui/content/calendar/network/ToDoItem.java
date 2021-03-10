@@ -1,4 +1,4 @@
-package com.example.myfirstapp.network;
+package com.example.myfirstapp.ui.content.calendar.network;
 
 
 import java.util.List;
