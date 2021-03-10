@@ -12,7 +12,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/login_title"
-        android:textColor="?attr/textColorTheme"
+        android:textColor="@color/textColorTheme"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:hint="@string/login_email_hint"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:textColor="?attr/textColorTheme"
+        android:textColor="@color/colorEditTextDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_title_view" />

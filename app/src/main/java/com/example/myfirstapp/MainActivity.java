@@ -1,7 +1,6 @@
 package com.example.myfirstapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Build;
@@ -10,11 +9,11 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myfirstapp.authentication.SplashScreenActivity;
 import com.example.myfirstapp.ui.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements SettingsFragment.SettingsStateListener, KeyEvent.Callback {
@@ -23,10 +22,10 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         sharedPreferences =
                 getSharedPreferences("com.example.myfirstapp.userstore", Context.MODE_PRIVATE);
-        checkAndSetTheme();
-        super.onCreate(savedInstanceState);
+        checkInitialTheme();
         com.example.myfirstapp.databinding.ActivityMainBinding binding = com.example.myfirstapp.databinding.ActivityMainBinding
                 .inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -39,11 +38,21 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    private void checkAndSetTheme() {
-        if (sharedPreferences.getBoolean("darkTheme", true)) {
-            setTheme(R.style.AppDarkTheme);
+    private void checkInitialTheme() {
+        boolean currentNightMode = sharedPreferences.getBoolean("darkTheme", false);
+        if (currentNightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
-            setTheme(R.style.AppTheme);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+
+    private void checkAndSetTheme(boolean darkTheme) {
+        if (darkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     @Override
-    public void onThemeChange() {
-        checkAndSetTheme();
+    public void onThemeChange(boolean darkTheme) {
+        checkAndSetTheme(darkTheme);
     }
 }

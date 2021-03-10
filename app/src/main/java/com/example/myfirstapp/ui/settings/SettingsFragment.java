@@ -3,6 +3,7 @@ package com.example.myfirstapp.ui.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -10,7 +11,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.authentication.AuthenticationActivity;
-import com.example.myfirstapp.authentication.SplashScreenActivity;
 import com.example.myfirstapp.databinding.FragmentSettingsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +35,7 @@ public class SettingsFragment extends Fragment {
     public interface SettingsStateListener {
         void onSoundChange();
 
-        void onThemeChange();
+        void onThemeChange(boolean darkTheme);
     }
 
     public static FragmentSettingsBinding binding;
@@ -66,7 +65,9 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setCheckedDarkThemeSwitch() {
-        binding.switchEnableDarkTheme.setChecked(sharedPreferences.getBoolean("darkTheme", false));
+        int currentNightMode = getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        binding.switchEnableDarkTheme.setChecked(currentNightMode == Configuration.UI_MODE_NIGHT_YES);
     }
 
     private void setCheckedSoundSwitch() {
@@ -83,7 +84,11 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!TextUtils.isEmpty(binding.editTextNickname.getText().toString().trim())) {
-                    binding.imageViewEditNicknameIcon.setImageResource(R.drawable.ic_save_foreground);
+                    if (sharedPreferences.getBoolean("darkTheme", true)) {
+                        binding.imageViewEditNicknameIcon.setImageResource(R.drawable.ic_save_foreground);
+                    } else {
+                        binding.imageViewEditNicknameIcon.setImageResource(R.drawable.ic_save_foreground);
+                    }
                 } else {
                     binding.imageViewEditNicknameIcon.setImageResource(0);
                 }
@@ -121,6 +126,7 @@ public class SettingsFragment extends Fragment {
                     Context.MODE_PRIVATE).edit().clear().apply();
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(requireContext(), "Успешно се одјавивте!", Toast.LENGTH_LONG).show();
+            sharedPreferences.edit().clear().apply();
             startActivity(new Intent(requireContext(), AuthenticationActivity.class));
             requireActivity().finish();
         });
@@ -156,13 +162,11 @@ public class SettingsFragment extends Fragment {
             if (isVisible()) {
                 if (binding.switchEnableDarkTheme.isChecked()) {
                     sharedPreferences.edit().putBoolean("darkTheme", true).apply();
+                    settingsStateListener.onThemeChange(true);
                 } else {
                     sharedPreferences.edit().putBoolean("darkTheme", false).apply();
+                    settingsStateListener.onThemeChange(false);
                 }
-                settingsStateListener.onThemeChange();
-                Intent intent = new Intent(getActivity().getApplicationContext(), SplashScreenActivity.class);
-                startActivity(intent);
-                getActivity().finish();
             }
         });
     }

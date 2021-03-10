@@ -6,7 +6,7 @@
     <string name="title_settings">Поставувања</string>
     <string name="calendar">Календар на активности</string>
     <string name="math">Математика</string>
-    <string name="memory">Меморија</string>
+    <string name="relaxing">Релаксација</string>
     <string name="welcome_message">Здраво \</string>
 
     <!--Strings for LoginFragment-->
@@ -35,4 +35,6 @@
     <string name="nickname_text">Твојот надимак</string>
     <string name="enable_sound_app_text">Вклучи звук во апликацијата</string>
     <string name="enable_dark_theme_text">Вклучи темна тема</string>
+    <string name="average_level_label"><font color='#42c1a8'>Средно</font></string>
+    <string name="hard_level_label"><font color='#42c1a8'>Тешко</font></string>
 </resources>
