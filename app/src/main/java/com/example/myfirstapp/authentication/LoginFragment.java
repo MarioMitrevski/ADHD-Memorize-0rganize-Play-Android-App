@@ -26,7 +26,6 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding loginBinding;
     private SharedPreferences sharedPreferences;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -45,8 +44,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void initClickListeners() {
-
-        loginBinding.registerButton.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment));
+        loginBinding.registerButton.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment));
         loginBinding.buttonLogin.setOnClickListener(view -> validateFields());
     }
 
@@ -67,7 +66,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         } else {
-            loginBinding.editTextLoginEmail.setError("Пополнете ги полињата соодветно!");
             Toast.makeText(getActivity(), "Пополнете ги полињата соодветно!", Toast.LENGTH_SHORT).show();
         }
     }

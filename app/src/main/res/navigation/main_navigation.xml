@@ -49,5 +49,6 @@
         android:id="@+id/addActivityFragment"
         android:name="com.example.myfirstapp.ui.content.calendar.AddToDoItemFragment"
         android:label="fragment_add_activity"
-        tools:layout="@layout/fragment_add_todoitem" />
+        tools:layout="@layout/fragment_add_todoitem">
+    </fragment>
 </navigation>
