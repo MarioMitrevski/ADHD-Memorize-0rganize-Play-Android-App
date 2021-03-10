@@ -1,4 +1,4 @@
-package com.example.myfirstapp.ui.content.memory;
+package com.example.myfirstapp.ui.content.relief;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,26 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myfirstapp.databinding.FragmentMemoryBinding;
 
-public class MemoryFragment extends Fragment {
+import com.example.myfirstapp.databinding.FragmentVideoReliefBinding;
 
-    private FragmentMemoryBinding binding;
+public class VideoReliefFragment extends Fragment {
+
+    private FragmentVideoReliefBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentMemoryBinding.inflate(inflater, container, false);
+        binding = FragmentVideoReliefBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.toolbarText.setText("Меморија");
-        binding.backBtn.setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
 
