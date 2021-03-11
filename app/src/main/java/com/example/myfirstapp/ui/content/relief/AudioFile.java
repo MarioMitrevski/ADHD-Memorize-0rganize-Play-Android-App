@@ -1,31 +1,27 @@
 package com.example.myfirstapp.ui.content.relief;
 
 
-public class AudioFile {
+import java.io.Serializable;
 
-    private String path;
+public class AudioFile implements Serializable {
+
     private String title;
     private String artist;
-    private String duration;
+    private int audioResource;
+    private int imageResource;
 
-    public AudioFile(String path, String title, String artist, String duration) {
-        this.path = path;
-        this.title = title;
-        this.artist = artist;
-        this.duration = duration;
-    }
+
 
     public AudioFile() {
     }
 
-
-    public String getPath() {
-        return path;
+    public AudioFile(String title, String artist, int audioResource, int imageResource) {
+        this.title = title;
+        this.artist = artist;
+        this.audioResource = audioResource;
+        this.imageResource = imageResource;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
 
     public String getTitle() {
         return title;
@@ -43,11 +39,19 @@ public class AudioFile {
         this.artist = artist;
     }
 
-    public String getDuration() {
-        return duration;
+    public int getAudioResource() {
+        return audioResource;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setAudioResource(int audioResource) {
+        this.audioResource = audioResource;
+    }
+
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
     }
 }

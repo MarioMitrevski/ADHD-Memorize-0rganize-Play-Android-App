@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
@@ -17,10 +18,11 @@ import java.util.List;
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioItemViewHolder> {
 
     private List<AudioFile> audioFiles;
+    private Consumer<AudioFile> onItemClicked;
 
-
-    public AudioAdapter(ArrayList<AudioFile> audioFiles) {
+    public AudioAdapter(ArrayList<AudioFile> audioFiles, Consumer<AudioFile> onItemClicked) {
         this.audioFiles = audioFiles;
+        this.onItemClicked = onItemClicked;
     }
 
     @NonNull
@@ -34,7 +36,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioItemVie
 
     @Override
     public void onBindViewHolder(@NonNull AudioItemViewHolder holder, int position) {
-        holder.getAudioTitleView().setText(audioFiles.get(position).getTitle());
+        holder.bind(audioFiles.get(position));
     }
 
     @Override
@@ -43,7 +45,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioItemVie
     }
 
 
-    public static class AudioItemViewHolder extends RecyclerView.ViewHolder {
+    class AudioItemViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView audioImageView;
         private final TextView audioTitleView;
@@ -55,12 +57,11 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioItemVie
             audioImageView = (ImageView) itemView.findViewById(R.id.audioImageView);
         }
 
-        public TextView getAudioTitleView() {
-            return audioTitleView;
-        }
+        void bind(AudioFile audioFile) {
+            audioTitleView.setText(audioFile.getTitle());
+            audioImageView.setImageResource(audioFile.getImageResource());
 
-        public ImageView getAudioImageView() {
-            return audioImageView;
+            itemView.setOnClickListener(v -> onItemClicked.accept(audioFile));
         }
     }
 }
