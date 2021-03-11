@@ -43,9 +43,11 @@ public class ContentFragment extends Fragment {
         binding.mathCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_mathFragment));
         setUsersNickname();
     }
-    
+
     private void setUsersNickname() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null)
+            return;
         DatabaseReference usersNicknameDatabaseRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(currentUser.getUid()).child("nickname");
         usersNicknameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
