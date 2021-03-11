@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">My First App</string>
+    <string name="app_name">Научи, меморирај и планирај</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_content">Содржина</string>
     <string name="title_settings">Поставувања</string>
     <string name="calendar">Календар на активности</string>
     <string name="math">Математика</string>
-    <string name="memory">Меморија</string>
-    <string name="welcome_message">Здраво Андреј</string>
+    <string name="relaxing">Релаксација</string>
+    <string name="welcome_message">Здраво \</string>
 
     <!--Strings for LoginFragment-->
     <string name="login_button">Најави се</string>
@@ -24,6 +24,19 @@
     <string name="welcome_title">Добредојдовте на ADHD\nНаучи, Меморирај и Планирај</string>
     <string name="login_label">Корисник сте? Најавете се</string>
     <string name="register_title">Форма за регистрација</string>
+
     <string name="relief_audio_btn_text">Аудио</string>
     <string name="relief_video_btn_text">Видео</string>
+
+    <!--Strings for GameMathFragment-->
+    <string name="points_prefix">Поени:\u0020</string>
+    <string name="question_counter_prefix">Број на прашање:\u0020</string>
+    <string name="result_dialog_title">Резултати од квизот по математика!</string>
+    <string name="starting_dialog_level_maths_game">Одбери ниво</string>
+    <string name="maths_game_toolbar_text">Час по математика</string>
+    <string name="verification_mail_sent_text">\"Верификациски меил е испратен на \"</string>
+    <string name="passwords_not_match_text">Лозинките не се исти!</string>
+    <string name="nickname_text">Твојот надимак</string>
+    <string name="enable_sound_app_text">Вклучи звук во апликацијата</string>
+    <string name="enable_dark_theme_text">Вклучи темна тема</string>
 </resources>

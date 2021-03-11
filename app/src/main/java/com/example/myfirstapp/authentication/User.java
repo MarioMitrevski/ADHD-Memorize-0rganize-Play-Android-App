@@ -1,18 +1,27 @@
 package com.example.myfirstapp.authentication;
 
 public class User {
-    private String nameSurname;
+    private String nickname;
     private String userId;
+    private String points;
 
     public User() {
     }
 
-    public String getNameSurname() {
-        return nameSurname;
+    public String getPoints() {
+        return points;
     }
 
-    public void setNameSurname(String nameSurname) {
-        this.nameSurname = nameSurname;
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUserId() {

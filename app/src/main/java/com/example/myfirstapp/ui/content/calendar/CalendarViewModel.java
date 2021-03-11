@@ -18,46 +18,34 @@ import java.util.stream.Collectors;
 public class CalendarViewModel extends ViewModel {
 
     CalendarDay selectedDate;
-    ToDoItemsCollection toDoItemsCollection;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void init(CalendarDay date) {
         if (selectedDate == null) {
             selectedDate = date;
         }
-        toDoItemsCollection = new ToDoItemsCollection();
-        ArrayList<ToDoItem> toDoItems = new ArrayList<>();
-        toDoItems.add(new ToDoItem("Напиши домашно", "2021-03-12", "12:00", R.drawable.ic_homework, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "2021-03-12", "13:00", R.drawable.ic_friends, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Јади овошје", "2021-03-12", "14:00", R.drawable.ic_lunch_box, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Напиши домашно", "2021-03-12", "12:00", R.drawable.ic_homework, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "2021-03-12", "13:00", R.drawable.ic_friends, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Јади овошје", "2021-03-12", "14:00", R.drawable.ic_lunch_box, new ArrayList<>()));
-
-        toDoItems.add(new ToDoItem("Напиши домашно", "2021-03-01", "12:00", R.drawable.ic_homework, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Играј си со другарите", "2021-03-01", "13:00", R.drawable.ic_friends, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Јади овошје", "2021-03-01", "14:00", R.drawable.ic_lunch_box, new ArrayList<>()));
-
-        toDoItems.add(new ToDoItem("Напиши домашно", "2021-02-24", "12:00", R.drawable.ic_homework, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Играј си со другарите Играј си со другарите Играј си со другарите", "2021-02-24", "13:00", R.drawable.ic_friends, new ArrayList<>()));
-        toDoItems.add(new ToDoItem("Јади овошје", "2021-02-24", "14:00", R.drawable.ic_lunch_box, new ArrayList<>()));
-        toDoItemsCollection.getToDoItemsMap().putIfAbsent("1234", toDoItems);
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<ToDoItem> getToDoItems() {
-        return toDoItemsCollection.getToDoItemsMap()
-                .getOrDefault("1234", new ArrayList<>())
+        return ToDoItemsCollection.getInstance().getToDoItems("1234")
                 .stream()
                 .filter(t -> t.getDate().equals(selectedDate.getDate().toString()))
                 .collect(Collectors.toList());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void deleteToDoItem(ToDoItem toDoItem) {
+        ToDoItemsCollection.getInstance().getToDoItems("1234").remove(toDoItem);
     }
 
     public CalendarDay getSelectedDate() {
         return selectedDate;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setSelectedDate(CalendarDay newDate) {
         selectedDate = newDate;
     }

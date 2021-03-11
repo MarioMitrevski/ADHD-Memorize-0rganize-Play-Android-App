@@ -1,10 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:tag="settingsF"
     tools:context=".ui.settings.SettingsFragment">
+
+    <EditText
+        android:id="@+id/editTextNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edit_text_background"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:padding="12dp"
+        tools:text="@string/nickname_text"
+        android:textColor="@color/textColorTheme"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_nickname"
+        app:layout_constraintStart_toStartOf="@+id/text_view_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_nickname"
+        tools:ignore="LabelFor" />
+
+
+    <ImageView
+        android:id="@+id/image_view_edit_nickname_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_pencil_foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNickname"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
+        app:layout_constraintTop_toTopOf="@+id/editTextNickname" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_enable_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/enable_sound_app_text"
+        android:textColor="@color/textColorTheme"
+        android:textSize="18sp"
+        android:theme="@style/SwitchTheme"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNickname"
+        app:layout_constraintStart_toStartOf="@+id/editTextNickname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNickname"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_enable_dark_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/textColorTheme"
+        android:text="@string/enable_dark_theme_text"
+        android:textSize="18sp"
+        android:theme="@style/SwitchTheme"
+        app:layout_constraintEnd_toEndOf="@+id/switch_enable_sound"
+        app:layout_constraintStart_toStartOf="@+id/switch_enable_sound"
+        app:layout_constraintTop_toBottomOf="@+id/switch_enable_sound"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/text_view_nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/nickname_text"
+        android:textColor="@color/textColorTheme"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:theme="@style/SwitchTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_logout"
@@ -13,12 +97,14 @@
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/btn_rounded_background"
+        android:background="@drawable/rounded_add_todoitem_btn"
         android:text="@string/button_logout_label"
-        android:textColor="@color/white"
+        android:textColor="@color/colorMathAnswerText"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNickname"
+        app:layout_constraintVertical_bias="0.946" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
