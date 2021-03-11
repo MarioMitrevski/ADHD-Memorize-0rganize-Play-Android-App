@@ -1,23 +1,28 @@
 package com.example.myfirstapp.network;
 
 
-import java.util.List;
+import java.util.Objects;
 
 public class ToDoItem {
 
+    private String id;
+    private int imageUri;
     private String title;
+    private String description;
     private String time;
     private String date;
-    private int imageUri;
-    private String description;
-    private List<String> stepsList;
 
-    public ToDoItem(String title, String date, String time, int imageUri, List<String> stepsList) {
+    public ToDoItem(String id, String title, String date, String time, int imageUri, String description) {
+        this.id = id;
         this.date = date;
         this.time = time;
         this.title = title;
         this.imageUri = imageUri;
-        this.stepsList = stepsList;
+        this.description = description;
+    }
+
+    public ToDoItem(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -40,7 +45,26 @@ public class ToDoItem {
         return date;
     }
 
-    public List<String> getStepsList() {
-        return stepsList;
+    public String getId() {
+        return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ToDoItem toDoItem = (ToDoItem) o;
+        return Objects.equals(id, toDoItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
 }

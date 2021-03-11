@@ -1,5 +1,6 @@
 package com.example.myfirstapp.ui.content.calendar;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,19 +8,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.network.ToDoItem;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoItemViewHolder> {
 
     private List<ToDoItem> toDoItemsList;
+    private Consumer<ToDoItem> onItemClicked;
 
-    public static class ToDoItemViewHolder extends RecyclerView.ViewHolder {
+
+    class ToDoItemViewHolder extends RecyclerView.ViewHolder {
         private final TextView timeView;
         private final TextView titleView;
         private final ImageView imageView;
@@ -34,26 +42,30 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoItemViewHo
 
         }
 
-        public TextView getTitleView() {
-            return titleView;
-        }
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        void bind(ToDoItem toDoItem) {
+            titleView.setText(toDoItem.getTitle());
+            timeView.setText(toDoItem.getTime());
+            imageView.setImageResource(toDoItem.getImageUri());
 
-        public TextView getTimeView() {
-            return timeView;
-        }
-
-        public ImageView getImageView() {
-            return imageView;
+            itemView.setOnClickListener(v -> onItemClicked.accept(toDoItem));
         }
 
     }
 
-    public TodoAdapter(ArrayList<ToDoItem> toDoItems) {
+    public TodoAdapter(List<ToDoItem> toDoItems, Consumer<ToDoItem> onItemClicked) {
         toDoItemsList = toDoItems;
+        this.onItemClicked = onItemClicked;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void updateDataSet(List<ToDoItem> toDoItemList) {
         this.toDoItemsList = toDoItemList;
+        notifyDataSetChanged();
+    }
+
+    public void deleteToDoItem(ToDoItem toDoItem) {
+        toDoItemsList.remove(toDoItem);
         notifyDataSetChanged();
     }
 
@@ -66,12 +78,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoItemViewHo
         return new ToDoItemViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(ToDoItemViewHolder viewHolder, final int position) {
+        viewHolder.bind(toDoItemsList.get(position));
 
-        viewHolder.getTitleView().setText(toDoItemsList.get(position).getTitle());
-        viewHolder.getTimeView().setText(toDoItemsList.get(position).getTime());
-        viewHolder.getImageView().setImageResource(toDoItemsList.get(position).getImageUri());
     }
 
     @Override

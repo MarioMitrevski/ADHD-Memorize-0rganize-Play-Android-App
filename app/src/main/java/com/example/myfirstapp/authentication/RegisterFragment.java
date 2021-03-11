@@ -48,7 +48,8 @@ public class RegisterFragment extends Fragment {
         DatabaseReference newUserRef = FirebaseDatabase.getInstance().getReference().child("users")
                 .child(currentUser.getUid());
         User newUser = new User();
-        newUser.setNameSurname("");
+        newUser.setNickname(registerBinding.editTextNickname.getText().toString());
+        newUser.setPoints("0");
         newUser.setUserId(currentUser.getUid());
         newUserRef.setValue(newUser);
 
@@ -73,8 +74,8 @@ public class RegisterFragment extends Fragment {
                                     }
                                 });
             } else {
-                registerBinding.editTextRepeatPassword.setError("Пасвордите не се исти!");
-                Toast.makeText(getActivity(), "Пасвордите не се исти!",
+                registerBinding.editTextRepeatPassword.setError(getString(R.string.passwords_not_match_text));
+                Toast.makeText(getActivity(), "Лозинките не се исти!",
                         Toast.LENGTH_SHORT).show();
             }
         } else {
@@ -96,12 +97,12 @@ public class RegisterFragment extends Fragment {
                     if (task.isSuccessful()) {
                         registerNewUserToFireBase();
                         Toast.makeText(getActivity(),
-                                "Верификациски меил е испратен на " + currentUser.getEmail(),
+                                getString(R.string.verification_mail_sent_text) + currentUser.getEmail(),
                                 Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(getActivity(),
-                                "Регистрацијата е неуспешна обидете се повторно",
+                                "Регистрацијата е неуспешна. Обидете се повторно!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
