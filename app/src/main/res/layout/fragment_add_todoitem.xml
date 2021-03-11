@@ -134,7 +134,7 @@
                 android:background="@drawable/rounded_add_todoitem_btn"
                 android:paddingHorizontal="8dp"
                 android:text="Зачувај"
-                android:textColor="@color/white"
+                android:textColor="@color/colorMathAnswerText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/time_card" />

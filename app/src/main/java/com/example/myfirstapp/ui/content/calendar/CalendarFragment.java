@@ -23,9 +23,6 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 
 import org.threeten.bp.DayOfWeek;
 
-import java.util.Comparator;
-import java.util.List;
-
 public class CalendarFragment extends Fragment {
 
     private FragmentCalendarBinding binding;
@@ -142,7 +139,8 @@ public class CalendarFragment extends Fragment {
                     toDoItem.getImageUri());
 
         } else {
-            fragment = AddToDoItemFragment.create(null, null, null, calendarViewModel.selectedDate.getDate().toString(), null, -1);
+            fragment = AddToDoItemFragment.create(null, null, null,
+                    calendarViewModel.selectedDate.getDate().toString(), null, -1);
 
         }
         fragment.setAddToDoItemFragmentListener(() -> adapter.updateDataSet(calendarViewModel.getToDoItems()));

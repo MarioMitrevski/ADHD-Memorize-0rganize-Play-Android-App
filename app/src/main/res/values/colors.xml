@@ -33,4 +33,5 @@
     <color name="colorCorrectAnswer">#008577</color>
     <color name="colorWrongAnswer">#AB6259</color>
     <color name="dialogBackground">#FFF</color>
+    <color name="colorImgBackground">#FFF</color>
 </resources>
