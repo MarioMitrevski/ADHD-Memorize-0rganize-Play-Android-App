@@ -10,6 +10,8 @@ import android.widget.SeekBar;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.ActivityPlayerBinding;
+import com.example.myfirstapp.network.AudioFile;
+import com.example.myfirstapp.network.AudioItemsCollection;
 
 
 public class PlayerActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class PlayerActivity extends AppCompatActivity {
     Runnable runnable;
     int delay = 1000;
     Thread playThread;
+    private AudioItemsCollection audioItemsCollection;
 
 
     @Override
@@ -28,8 +31,13 @@ public class PlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        audioItemsCollection = new AudioItemsCollection();
         setContentView(view);
-        getAudioFile();
+
+        if (getIntent().getExtras() != null) {
+            setScreen((AudioFile) getIntent().getSerializableExtra("audioFile"));
+        }
+
         binding.durationAudioBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -60,10 +68,20 @@ public class PlayerActivity extends AppCompatActivity {
             }
         }, delay);
 
-        binding.backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        binding.backBtn.setOnClickListener(v -> finish());
 
+        binding.previousAudioIcon.setOnClickListener(v -> {
+            AudioFile a = audioItemsCollection.getPreviousAudio(audioFile.getId());
+            if (a != null) {
+                setScreen(a);
+            }
+        });
+        binding.nextAudioIcon.setOnClickListener(v -> {
+            AudioFile a = audioItemsCollection.getNextAudio(audioFile.getId());
+            if (a != null) {
+                setScreen(a);
+            }
+        });
 
     }
 
@@ -81,27 +99,23 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
-    private void getAudioFile() {
-        if (getIntent().getExtras() != null) {
-            audioFile = (AudioFile) getIntent().getSerializableExtra("audioFile");
-            setViews(audioFile);
-            binding.playPauseBtn.setImageResource(R.drawable.ic_pause_audio);
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                mediaPlayer = MediaPlayer.create(this, audioFile.getAudioResource());
-                mediaPlayer.start();
-            } else {
-                mediaPlayer = MediaPlayer.create(this, audioFile.getAudioResource());
-                mediaPlayer.start();
-            }
-            int totalDuration = mediaPlayer.getDuration() / 1000;
-            binding.durationAudioBar.setMax(totalDuration);
-            binding.totalAudioDuration.setText(formattedTime(totalDuration));
 
-
+    private void setScreen(AudioFile audioFile) {
+        this.audioFile = audioFile;
+        setViews(audioFile);
+        binding.playPauseBtn.setImageResource(R.drawable.ic_pause_audio);
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = MediaPlayer.create(this, audioFile.getAudioResource());
+            mediaPlayer.start();
+        } else {
+            mediaPlayer = MediaPlayer.create(this, audioFile.getAudioResource());
+            mediaPlayer.start();
         }
-
+        int totalDuration = mediaPlayer.getDuration() / 1000;
+        binding.durationAudioBar.setMax(totalDuration);
+        binding.totalAudioDuration.setText(formattedTime(totalDuration));
     }
 
     @Override
@@ -114,10 +128,10 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void playPauseBtnClicked() {
 
-        if(mediaPlayer.isPlaying()){
+        if (mediaPlayer.isPlaying()) {
             binding.playPauseBtn.setImageResource(R.drawable.ic_play_audio);
             mediaPlayer.pause();
-        }else{
+        } else {
             binding.playPauseBtn.setImageResource(R.drawable.ic_pause_audio);
             mediaPlayer.start();
         }

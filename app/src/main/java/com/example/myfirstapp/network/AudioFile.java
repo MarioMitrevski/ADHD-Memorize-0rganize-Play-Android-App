@@ -1,10 +1,11 @@
-package com.example.myfirstapp.ui.content.relief;
+package com.example.myfirstapp.network;
 
 
 import java.io.Serializable;
 
 public class AudioFile implements Serializable {
 
+    private int id;
     private String title;
     private String artist;
     private int audioResource;
@@ -15,7 +16,8 @@ public class AudioFile implements Serializable {
     public AudioFile() {
     }
 
-    public AudioFile(String title, String artist, int audioResource, int imageResource) {
+    public AudioFile(int id, String title, String artist, int audioResource, int imageResource) {
+        this.id = id;
         this.title = title;
         this.artist = artist;
         this.audioResource = audioResource;
@@ -53,5 +55,9 @@ public class AudioFile implements Serializable {
 
     public void setImageResource(int imageResource) {
         this.imageResource = imageResource;
+    }
+
+    public int getId() {
+        return id;
     }
 }

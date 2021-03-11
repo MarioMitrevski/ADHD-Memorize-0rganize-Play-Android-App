@@ -11,6 +11,7 @@ import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.network.AudioFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioItemVie
     private List<AudioFile> audioFiles;
     private Consumer<AudioFile> onItemClicked;
 
-    public AudioAdapter(ArrayList<AudioFile> audioFiles, Consumer<AudioFile> onItemClicked) {
+    public AudioAdapter(List<AudioFile> audioFiles, Consumer<AudioFile> onItemClicked) {
         this.audioFiles = audioFiles;
         this.onItemClicked = onItemClicked;
     }

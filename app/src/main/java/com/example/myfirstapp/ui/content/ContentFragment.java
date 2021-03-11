@@ -11,9 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.myfirstapp.MainActivity;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.authentication.SplashScreenActivity;
 import com.example.myfirstapp.databinding.FragmentContentBinding;
 import com.example.myfirstapp.ui.content.relief.ReliefActivity;
 

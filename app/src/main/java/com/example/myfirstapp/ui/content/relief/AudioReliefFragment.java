@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentAudioReliefBinding;
-import com.example.myfirstapp.databinding.FragmentVideoReliefBinding;
+import com.example.myfirstapp.network.AudioFile;
+import com.example.myfirstapp.network.AudioItemsCollection;
 
 import java.util.ArrayList;
 
@@ -22,31 +23,22 @@ public class AudioReliefFragment extends Fragment {
     private FragmentAudioReliefBinding binding;
     private AudioAdapter audioAdapter;
 
+    private AudioItemsCollection audioItemsCollection;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAudioReliefBinding.inflate(inflater, container, false);
+
+        audioItemsCollection = new AudioItemsCollection();
         binding.audioRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        audioAdapter = new AudioAdapter(this.initAudioFiles(), audioFile ->
+        audioAdapter = new AudioAdapter(audioItemsCollection.getAudioFiles(), audioFile ->
                 startActivity(new Intent(requireActivity(), PlayerActivity.class)
                         .putExtra("audioFile", audioFile)));
         binding.audioRecyclerView.setAdapter(audioAdapter);
 
         return binding.getRoot();
-    }
-
-
-    ArrayList<AudioFile> initAudioFiles() {
-        ArrayList<AudioFile> audioFiles = new ArrayList<>();
-        audioFiles.add(new AudioFile("Enjoy the sunset", "Sunny Artists", R.raw.adhd_audio_1, R.drawable.relax_yoga_1));
-        audioFiles.add(new AudioFile("Chill wit the wind", "Wind Artists", R.raw.adhd_audio_2, R.drawable.ic_adhd_audio_cover2));
-        audioFiles.add(new AudioFile("Nature Queen", "LoFi HiGroup", R.raw.adhd_audio_3, R.drawable.ic_adhd_audio_cover3));
-        audioFiles.add(new AudioFile("Sound of the Sea", "Duke Dumont", R.raw.adhd_audio_4, R.drawable.ic_adhd_audio_cover4));
-        audioFiles.add(new AudioFile("Ocean Drive", "GrooveGroup", R.raw.adhd_audio_5, R.drawable.ic_adhd_audio_cover5));
-        audioFiles.add(new AudioFile("Here Comes the Sun", "The Beatles", R.raw.adhd_audio_6, R.drawable.ic_adhd_audio_cover6));
-
-        return audioFiles;
     }
 
     @Override
