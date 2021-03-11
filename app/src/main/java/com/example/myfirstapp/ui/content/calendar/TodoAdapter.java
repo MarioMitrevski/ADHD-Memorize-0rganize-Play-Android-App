@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.network.ToDoItem;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItem;
 
 import java.util.ArrayList;
 import java.util.Collection;

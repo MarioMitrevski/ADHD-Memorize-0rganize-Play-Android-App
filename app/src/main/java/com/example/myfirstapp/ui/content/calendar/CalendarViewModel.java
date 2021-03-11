@@ -6,8 +6,8 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModel;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.network.ToDoItem;
-import com.example.myfirstapp.network.ToDoItemsCollection;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItem;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItemsCollection;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
