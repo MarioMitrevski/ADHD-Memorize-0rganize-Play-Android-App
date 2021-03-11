@@ -24,6 +24,10 @@
     <string name="welcome_title">Добредојдовте на ADHD\nНаучи, Меморирај и Планирај</string>
     <string name="login_label">Корисник сте? Најавете се</string>
     <string name="register_title">Форма за регистрација</string>
+
+    <string name="relief_audio_btn_text">Аудио</string>
+    <string name="relief_video_btn_text">Видео</string>
+
     <!--Strings for GameMathFragment-->
     <string name="points_prefix">Поени:\u0020</string>
     <string name="question_counter_prefix">Број на прашање:\u0020</string>

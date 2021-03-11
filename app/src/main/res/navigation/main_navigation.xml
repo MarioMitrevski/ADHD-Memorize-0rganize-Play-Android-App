@@ -15,9 +15,6 @@
             app:destination="@id/calendarFragment"
             app:launchSingleTop="false" />
         <action
-            android:id="@+id/action_contentFragment_to_memoryFragment"
-            app:destination="@id/memoryFragment" />
-        <action
             android:id="@+id/action_contentFragment_to_mathFragment"
             app:destination="@id/mathFragment" />
     </fragment>
@@ -35,11 +32,6 @@
             android:id="@+id/action_calendarFragment_to_addActivityFragment"
             app:destination="@id/addActivityFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/memoryFragment"
-        android:name="com.example.myfirstapp.ui.content.memory.MemoryFragment"
-        android:label="fragment_memory"
-        tools:layout="@layout/fragment_memory" />
     <fragment
         android:id="@+id/mathFragment"
         android:name="com.example.myfirstapp.ui.content.math.MathFragment"

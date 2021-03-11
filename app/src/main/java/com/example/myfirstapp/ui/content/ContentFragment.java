@@ -1,5 +1,6 @@
 package com.example.myfirstapp.ui.content;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.navigation.Navigation;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentContentBinding;
+import com.example.myfirstapp.ui.content.relief.ReliefActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +39,7 @@ public class ContentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.plannerCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_calendarFragment));
-        binding.memoryCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_memoryFragment));
+        binding.memoryCardView.setOnClickListener(v -> startActivity(new Intent(requireActivity(),ReliefActivity.class)));
         binding.mathCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_mathFragment));
         setUsersNickname();
     }
