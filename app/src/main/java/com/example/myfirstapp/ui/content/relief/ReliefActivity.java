@@ -33,7 +33,7 @@ public class ReliefActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.toolbarText.setText("Меморија");
+        binding.toolbarText.setText("Релаксација");
         binding.backBtn.setOnClickListener(v -> finish());
 
         initReliefViewPager();
