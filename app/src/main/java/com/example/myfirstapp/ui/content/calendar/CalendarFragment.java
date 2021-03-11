@@ -139,7 +139,8 @@ public class CalendarFragment extends Fragment {
                     toDoItem.getImageUri());
 
         } else {
-            fragment = AddToDoItemFragment.create(null, null, null, calendarViewModel.selectedDate.getDate().toString(), null, -1);
+            fragment = AddToDoItemFragment.create(null, null, null,
+                    calendarViewModel.selectedDate.getDate().toString(), null, -1);
 
         }
         fragment.setAddToDoItemFragmentListener(() -> adapter.updateDataSet(calendarViewModel.getToDoItems()));

@@ -39,11 +39,11 @@ public class ContentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.plannerCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_calendarFragment));
-        binding.memoryCardView.setOnClickListener(v -> startActivity(new Intent(requireActivity(),ReliefActivity.class)));
+        binding.memoryCardView.setOnClickListener(v -> startActivity(new Intent(requireActivity(), ReliefActivity.class)));
         binding.mathCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_mathFragment));
         setUsersNickname();
     }
-
+    
     private void setUsersNickname() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersNicknameDatabaseRef = FirebaseDatabase.getInstance().getReference("users")
