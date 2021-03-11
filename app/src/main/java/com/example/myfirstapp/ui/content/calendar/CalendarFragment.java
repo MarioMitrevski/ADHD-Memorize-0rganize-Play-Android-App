@@ -17,14 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.databinding.FragmentCalendarBinding;
-import com.example.myfirstapp.network.ToDoItem;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItem;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 
 import org.threeten.bp.DayOfWeek;
-
-import java.util.Comparator;
-import java.util.List;
 
 public class CalendarFragment extends Fragment {
 

@@ -6,8 +6,8 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myfirstapp.network.ToDoItem;
-import com.example.myfirstapp.network.ToDoItemsCollection;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItem;
+import com.example.myfirstapp.ui.content.calendar.network.ToDoItemsCollection;
 
 import java.util.List;
 import java.util.UUID;

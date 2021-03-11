@@ -25,7 +25,7 @@ public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding loginBinding;
     private SharedPreferences sharedPreferences;
-
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -54,17 +54,7 @@ public class LoginFragment extends Fragment {
         String password = loginBinding.editTextLoginPassword.getText().toString();
 
         if (checkUserCredentials(email, password)) {
-            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (currentUser == null) {
-                signInUserWithEmailAndPassword(email, password);
-            } else {
-                if (currentUser.isEmailVerified()) {
-                    signInUserWithEmailAndPassword(email, password);
-                } else {
-                    Toast.makeText(getActivity(), "Проверете ја меил адресата за да ја завршите регистрацијата!",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
+            signInUserWithEmailAndPassword(email, password);
         } else {
             Toast.makeText(getActivity(), "Пополнете ги полињата соодветно!", Toast.LENGTH_SHORT).show();
         }
@@ -72,7 +62,15 @@ public class LoginFragment extends Fragment {
 
     public void signInUserWithEmailAndPassword(String email, String password) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> navigateToMainScreen(email, password))
+                .addOnSuccessListener(authResult -> {
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user.isEmailVerified()) {
+                        navigateToMainScreen(email, password);
+                    } else {
+                        Toast.makeText(getActivity(), "Проверете ја меил адресата за да ја завршите регистрацијата!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Автентикацијата е неуспешна!", Toast.LENGTH_SHORT).show());
     }
 
