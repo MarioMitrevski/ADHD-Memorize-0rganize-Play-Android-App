@@ -230,15 +230,15 @@ public class MathFragment extends Fragment {
     private void setAnswersFeedback(String answer, View itemView) {
         MediaPlayer mediaPlayer;
         if (answer.equals(correctAnswer)) {
+            itemView.setBackgroundColor(getResources().getColor(R.color.colorCorrectAnswer));
             mediaPlayer = MediaPlayer.create(getActivity(), R.raw.correct_answer_sound);
             mediaPlayer.start();
             mathBinding.textViewUserPoints.setText(String.format("%s%s",
                     getString(R.string.points_prefix), ++points));
-            itemView.setBackgroundColor(Color.GREEN);
         } else {
+            itemView.setBackgroundColor(getResources().getColor(R.color.colorWrongAnswer));
             mediaPlayer = MediaPlayer.create(getActivity(), R.raw.bad_answer_sound);
             mediaPlayer.start();
-            itemView.setBackgroundColor(Color.RED);
             mathBinding.textViewUserPoints.setText(String.format("%s%s",
                     getString(R.string.points_prefix), --points));
         }
