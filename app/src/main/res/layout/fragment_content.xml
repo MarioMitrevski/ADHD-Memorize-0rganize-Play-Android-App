@@ -117,4 +117,27 @@
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/textView_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/planner_card_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageview_trophy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        tools:text="hahaha"
+        android:src="@drawable/ic_trophy"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_points"
+        app:layout_constraintEnd_toStartOf="@+id/textView_points"
+        app:layout_constraintTop_toTopOf="@+id/textView_points" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

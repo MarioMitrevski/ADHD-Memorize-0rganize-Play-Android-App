@@ -42,6 +42,28 @@ public class ContentFragment extends Fragment {
         binding.memoryCardView.setOnClickListener(v -> startActivity(new Intent(requireActivity(), ReliefActivity.class)));
         binding.mathCardView.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_contentFragment_to_mathFragment));
         setUsersNickname();
+        setUsersPoints();
+    }
+
+    private void setUsersPoints() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null)
+            return;
+        DatabaseReference usersNicknameDatabaseRef = FirebaseDatabase.getInstance().getReference("users")
+                .child(currentUser.getUid()).child("points");
+        usersNicknameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (isVisible()) {
+                    binding.textViewPoints.setText(String.valueOf(snapshot.getValue()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setUsersNickname() {
